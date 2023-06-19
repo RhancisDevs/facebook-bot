@@ -1,8 +1,8 @@
 {
-	"name": "AnupBot",
+	"name": "RhancisBot",
 	"version": "16.2.23",
-	"description": "A simple Facebook Messenger Bot made by Anup Kumar.",
-	"main": "anup.js",
+	"description": "A simple Facebook Messenger Bot made by Rhancis Queroda.",
+	"main": "Rhancis.js",
 	"scripts": {
 		"start": "node index",
 		"login": "node login",
