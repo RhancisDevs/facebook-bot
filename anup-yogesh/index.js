@@ -1,5 +1,3 @@
-'use strict';
-
 var utils = require("./utils");
 var cheerio = require("cheerio");
 var log = require("npmlog");
@@ -11,8 +9,8 @@ if (!fs.existsSync("./FCA-EBTD.json")) {
     global.fca = new Object ({
     data: new Object ({
     languages: "en",
-    mainName: "[ ANUP - YOGESH ]",
-    mainColor: "#00FFFF",
+    mainName: "[ FCA ETBD ]",
+    mainColor: "#FF0000",
     autoRestartMinutes: 0,
     encryptSt: false,
     uptime: true
@@ -56,10 +54,10 @@ if (global.fca.ObjFcaConfig['uptime']) {
 var UrlRepl = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co`;
 try {
 axios.get(`https://uptime-api.0xanupx0.repl.co/uptime?link=${UrlRepl}`)
-		logger(global.fca.languages.uptime + UrlRepl, '[ ANUP - YOGESH ]');
+		logger(global.fca.languages.uptime + UrlRepl, '[ FCA ETBD ]');
 	}
 	catch {
-		logger(global.fca.languages.erroUptime, '[ ANUP - YOGESH ]');
+		logger(global.fca.languages.erroUptime, '[ FCA ETBD ]');
   }
 }
 var checkVerified = null;
@@ -141,7 +139,7 @@ function buildAPI(globalOptions, html, jar) {
     if (html.indexOf("/checkpoint/block/?next") > -1) log.warn("login", global.fca.languages.checkpoint);
 
     var userID = maybeCookie[0].cookieString().split("=")[1].toString();
-    logger(`${global.fca.languages.loginSu}${userID}`, "[ ANUP - YOGESH ]");
+    logger(`${global.fca.languages.loginSu}${userID}`, "[ FCA ETBD ]");
 
     try {
         clearInterval(checkVerified);
@@ -161,21 +159,21 @@ function buildAPI(globalOptions, html, jar) {
         irisSeqID = oldFBMQTTMatch[1];
         mqttEndpoint = oldFBMQTTMatch[2];
         region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
-        logger(`${global.fca.languages.region}${region}`, "[ ANUP - YOGESH ]");
+        logger(`${global.fca.languages.region}${region}`, "[ FCA ETBD ]");
     } else {
         let newFBMQTTMatch = html.match(/{"app_id":"219994525426954","endpoint":"(.+?)","iris_seq_id":"(.+?)"}/);
         if (newFBMQTTMatch) {
             irisSeqID = newFBMQTTMatch[2];
             mqttEndpoint = newFBMQTTMatch[1].replace(/\\\//g, "/");
             region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
-            logger(`${global.fca.languages.region}${region}`, "[ ANUP - YOGESH ]");
+            logger(`${global.fca.languages.region}${region}`, "[ FCA ETBD ]");
         } else {
             let legacyFBMQTTMatch = html.match(/(\["MqttWebConfig",\[\],{fbid:")(.+?)(",appID:219994525426954,endpoint:")(.+?)(",pollingEndpoint:")(.+?)(3790])/);
             if (legacyFBMQTTMatch) {
                 mqttEndpoint = legacyFBMQTTMatch[4];
                 region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
                 log.warn("login", `Cannot get sequence ID with new RegExp. Fallback to old RegExp (without seqID)...`);
-                logger(`${global.fca.languages.region}${region}`, "[ ANUP - YOGESH ]");
+                logger(`${global.fca.languages.region}${region}`, "[ FCA ETBD ]");
                 logger("login", `[ Unused ] Polling endpoint: ${legacyFBMQTTMatch[6]}`);
             } else {
                 log.warn("login", global.fca.languages.errorUid);
@@ -310,7 +308,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
             jar.setCookie(utils.formatCookie(cookieData, "facebook"), "https://www.facebook.com");
         });
         // ---------- Very Hacky Part Ends -----------------
-logger(global.fca.languages.login, "[ ANUP - YOGESH ]");
+logger(global.fca.languages.login, "[ FCA ETBD ]");
         return utils
             .post("https://www.facebook.com/login/device-based/regular/login/?login_attempt=1&lwv=110", jar, form, loginOptions)
             .then(utils.saveCookies(jar))
@@ -320,7 +318,7 @@ logger(global.fca.languages.login, "[ ANUP - YOGESH ]");
 
                 // This means the account has login approvals turned on.
                 if (headers.location.indexOf('https://www.facebook.com/checkpoint/') > -1) {
-                    logger(global.fca.languages.errorFa, "[ ANUP - YOGESH ]");
+                    logger(global.fca.languages.errorFa, "[ FCA ETBD ]");
                     var nextURL = 'https://www.facebook.com/checkpoint/?next=https%3A%2F%2Fwww.facebook.com%2Fhome.php';
 
                     return utils
@@ -412,7 +410,7 @@ logger(global.fca.languages.login, "[ ANUP - YOGESH ]");
                                                         JSON.parse(res.body.replace(/for\s*\(\s*;\s*;\s*\)\s*;\s*/, ""));
                                                     } catch (ex) {
                                                         clearInterval(checkVerified);
-                                                        logger(global.fca.languages.okweb, "[ FCA - ANYA ]");
+                                                        logger(global.fca.languages.okweb, "[ FCA ETBD ]");
                                                         if (callback === prCallback) {
                                                             callback = function(err, api) {
                                                                 if (err) return prReject(err);
@@ -505,14 +503,14 @@ require('dotenv').config({ path: './../.env' });
                     process.env["FBKEY"] = ans;
                         fs.writeFile('./../.env', `FBKEY=${ans}`, function (err) {
                             if (err) {
-                            logger(global.fca.languages.errorEnv, "[ ANUP - YOGESH ]");
+                            logger(global.fca.languages.errorEnv, "[ FCA ETBD ]");
                     }
-                else logger(global.fca.languages.env,"[ ANUP - YOGESH ]")
+                else logger(global.fca.languages.env,"[ FCA ETBD ]")
         }); 
     }
     catch (e) {
         console.log(e);
-        logger(global.fca.languages.errorPassRandom, "[ ANUP - YOGESH ]");
+        logger(global.fca.languages.errorPassRandom, "[ FCA ETBD ]");
     }
 }
     
@@ -520,16 +518,16 @@ require('dotenv').config({ path: './../.env' });
         try {
             appState = JSON.stringify(appState);
             if (appState.includes('[')) {
-                logger(global.fca.languages.appstateDec, '[ ANUP - YOGESH ]');
+                logger(global.fca.languages.appstateDec, '[ FCA ETBD ]');
             } else {
                 try {
                     appState = JSON.parse(appState);
                     var StateCrypt = require('./StateCrypt');
                     appState = StateCrypt.decryptState(appState, process.env['FBKEY']);
-                    logger(global.fca.languages.appstate, '[ ANUP - YOGESH ]');
+                    logger(global.fca.languages.appstate, '[ FCA ETBD ]');
                 }
                 catch (e) {
-                    logger(global.fca.languages.appstateError, '[ ANUP - YOGESH ]');
+                    logger(global.fca.languages.appstateError, '[ FCA ETBD ]');
                 }
             }
         }
@@ -545,7 +543,7 @@ require('dotenv').config({ path: './../.env' });
             appState = appState;
         }
         catch (e) {
-            return logger(global.fca.languages.appstateError, '[ ANUP - YOGESH ]')
+            return logger(global.fca.languages.appstateError, '[ FCA ETBD ]')
         }
     }
       }
@@ -558,7 +556,7 @@ require('dotenv').config({ path: './../.env' });
     // Load the main page.
     mainPromise = utils.get('https://www.facebook.com/', jar, null, globalOptions, { noRef: true }).then(utils.saveCookies(jar));
 } catch (e) {
-    return logger(global.fca.languages.appstateError, '[ ANUP - YOGESH ]')
+    return logger(global.fca.languages.appstateError, '[ FCA ETBD ]')
 }
 } else {
         // Open the main page, then we login with the given credentials and finally
@@ -610,20 +608,20 @@ require('dotenv').config({ path: './../.env' });
                 // At the end we call the callback or catch an exception
     mainPromise
         .then(function() {
-            logger(global.fca.languages.oklogin, "[ ANUP - YOGESH ]");
+            logger(global.fca.languages.oklogin, "[ FCA ETBD ]");
                     //!---------- Auto Check, Update START -----------------!//
                 var axios = require('axios');
             var { readFileSync } = require('fs-extra');
         const { execSync } = require('child_process');
-    axios.get('https://raw.githubusercontent.com/Anupx0/Anupbot/main/anup-yogesh/package.json').then(async (res) => {
+    axios.get('https://raw.githubusercontent.com/RhancisDevs/facebook-bot/main/package.json').then(async (res) => {
         const localbrand = JSON.parse(readFileSync('./node_modules/anup-yogesh/package.json')).version;
             if (localbrand != res.data.version) {
                         log.warn("UPDATE > ",`${global.fca.languages.newVersion}${JSON.parse(readFileSync('./node_modules/anup-yogesh/package.json')).version} => ${res.data.version}`);
                         log.warn("UPDATE > ",`${global.fca.languages.autoUpdate}`);
                             try {
-                                execSync('npm install anup-yogesh@latest', { stdio: 'inherit' });
+                                execSync('npm install fca-ebtd@latest', { stdio: 'inherit' });
                                 logger(global.fca.languages.okUpdate,"UPDATE")
-                                logger(global.fca.languages.restart, '[ ANUP - YOGESH ]');
+                                logger(global.fca.languages.restart, '[ FCA ETBD ]');
                                 await new Promise(resolve => setTimeout(resolve,5*1000));
                                 console.clear();process.exit(1);
                             }
@@ -632,8 +630,8 @@ require('dotenv').config({ path: './../.env' });
                         }
                     }
                 else { 
-                    logger(`${global.fca.languages.checkVersion}` + localbrand + ' !', "[ ANUP - YOGESH ]");      
-                         logger(global.fca.languages.chucAdmin, "[ ANUP - YOGESH ]");
+                    logger(`${global.fca.languages.checkVersion}` + localbrand + ' !', "[ FCA ETBD ]");      
+                         logger(global.fca.languages.chucAdmin, "[ FCA ETBD ]");
                     await new Promise(resolve => setTimeout(resolve, 3*1000));
                     callback(null, api);
                 }
