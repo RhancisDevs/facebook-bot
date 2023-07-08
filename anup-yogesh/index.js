@@ -6,7 +6,7 @@ var log = require("npmlog");
 var logger = require('./logger');
 var fs = require("fs-extra");
 var axios = require('axios')
-if (!fs.existsSync("./Aliya_Config.json")) {
+if (!fs.existsSync("./FCA-EBTD.json")) {
   log.warn("warn", "FcaConfig File Not Found Create New")
     global.fca = new Object ({
     data: new Object ({
@@ -18,13 +18,13 @@ if (!fs.existsSync("./Aliya_Config.json")) {
     uptime: true
  })
     })
-fs.writeFileSync("./Aliya_Config.json", JSON.stringify(global.fca.data, null, "\t"))
+fs.writeFileSync("./FCA-EBTD.json", JSON.stringify(global.fca.data, null, "\t"))
   return process.exit(1)
 }
 try {
       var langfile = JSON.parse(fs.readFileSync(__dirname + "/languages/languages.json", 'utf-8'));
 var lang
-    switch (require("../../Aliya_Config.json").languages) {
+    switch (require("../../FCA-EBTD.json").languages) {
       case "vi": lang = langfile.vi.index;
         break;
       case "en": lang = langfile.en.index;
@@ -34,7 +34,7 @@ var lang
       case "jp": lang = langfile.jp.index;
         break;
       default: {
-      log.warn("warn", "Only 4 Kinds of Languages ​​EN, VI, TH & JP Currently Supported, Self Fix By Finding And Deleting Aliya_Config.json File")
+      log.warn("warn", "Only 4 Kinds of Languages ​​EN, VI, TH & JP Currently Supported, Self Fix By Finding And Deleting FCA-EBTD.json File")
       process.exit(0)
       }
     }
@@ -44,7 +44,7 @@ var lang
     process.exit(0)
 }
 global.fca = new Object({
-     ObjFcaConfig: require("../../Aliya_Config.json"),
+     ObjFcaConfig: require("../../FCA-EBTD.json"),
      languages: lang
 })
 if (global.fca.ObjFcaConfig['autoRestartMinutes'] != 0) {
