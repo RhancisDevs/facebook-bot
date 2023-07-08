@@ -10,20 +10,20 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Anupx0/Anupbot"
+		"url": "https://github.com/RhancisDevs/facebook-bot"
 	},
 	"keywords": [
 		"bot",
 		"facebook",
-		"projectanupbot",
+		"Rhancis Bot",
 		"messenger"
 	],
-	"author": "Anup Kumar",
+	"author": "Rhancis Kyutie",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/Anupx0/Anupbot/issues"
+		"url": "https://github.com/RhancisDevs/facebook-bot/issues"
 	},
-	"homepage": "https://github.com/Anupx0/Anupbot",
+	"homepage": "https://github.com/RhancisDevs/facebook-bot",
 	"dependencies": {
 		"@miraipr0ject/assets": "",
 		"@replit/database": "^2.0.2",
