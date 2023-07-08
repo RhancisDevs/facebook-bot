@@ -11,12 +11,12 @@
   "author": "Anup Kumar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Anupx0/Anupbot/tree/main/anup-yogesh/issues"
+    "url": "https://github.com/RhancisDevs/facebook-bot/tree/main/anup-yogesh/issues"
   },
-  "homepage": "https://github.com/Anupx0/Anupbot/tree/main/anup-yogesh#readme",
+  "homepage": "https://github.com/RhancisDevs/facebook-bot/tree/main/anup-yogesh#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Anupx0/Anupbot/tree/main/anup-yogesh.git"
+    "url": "https://github.com/RhancisDevs/facebook-bot/tree/main/anup-yogesh.git"
   },
   "dependencies": {
     "aes-js": "^3.1.2",
